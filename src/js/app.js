@@ -10,7 +10,7 @@ import examRepository from './storage/examRepository.js';
 
 // Import pages
 import DashboardPage from './pages/dashboard.js';
-import { PhysicsPage, ChemistryPage, MathematicsPage, SubjectPage } from './pages/subject.js';
+import SubjectPage, { PhysicsPage, ChemistryPage, MathematicsPage } from './pages/subject.js';
 import { FavoritesPage, RecentPage } from './pages/favorites.js';
 import ViewerPage from './pages/viewer.js';
 import ImportPage from './pages/import.js';

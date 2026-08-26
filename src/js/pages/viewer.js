@@ -344,21 +344,3 @@ export class ViewerPage {
 }
 
 export default ViewerPage;
-                <div style="color: var(--color-text-secondary); font-size: var(--font-size-lg);">
-                    Fichier ${fileType.toUpperCase()} prêt à être ouvert
-                </div>
-                <div style="margin-top: var(--spacing-lg);">
-                    <a class="btn btn-primary" href="${fileUrl}" target="_blank" rel="noopener noreferrer">
-                        Ouvrir le fichier
-                    </a>
-                </div>
-            </div>
-        `;
-    }
-
-    cleanup() {
-        // Cleanup if needed
-    }
-}
-
-export default ViewerPage;

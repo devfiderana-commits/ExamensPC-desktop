@@ -183,7 +183,7 @@ fn create_exam(state: State<AppState>, exam: ExamInput) -> Result<ExamRecord, St
             exam.chapter,
             exam.year,
             exam.session,
-            exam.file_path.unwrap_or_default(),
+            exam.file_path.clone().unwrap_or_default(),
             file_type,
             now,
             now
@@ -429,7 +429,7 @@ pub fn run() {
         })
         .setup(|app| {
             let app_handle = app.handle();
-            if let Ok(data_dir) = app.path_resolver().app_data_dir() {
+            if let Ok(data_dir) = app.path().app_data_dir() {
                 fs::create_dir_all(&data_dir).map_err(|e| format!("Failed to create app data directory: {}", e))?;
                 if let Ok(mut state) = app_handle.state::<AppState>().data_dir.lock() {
                     *state = Some(data_dir);

@@ -1,0 +1,88 @@
+/* CSS Variables for theming */
+:root {
+    /* Light theme (default) */
+    --color-bg: #ffffff;
+    --color-bg-secondary: #f8f9fa;
+    --color-bg-tertiary: #e9ecef;
+    --color-text: #212529;
+    --color-text-secondary: #6c757d;
+    --color-text-tertiary: #adb5bd;
+    --color-border: #dee2e6;
+    --color-border-hover: #adb5bd;
+    --color-primary: #0d6efd;
+    --color-primary-hover: #0b5ed7;
+    --color-primary-light: #e7f1ff;
+    --color-success: #198754;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-info: #0dcaf0;
+    
+    /* Sidebar */
+    --color-sidebar-bg: #f8f9fa;
+    --color-sidebar-text: #212529;
+    --color-sidebar-hover: #e9ecef;
+    --color-sidebar-active: #0d6efd;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
+    /* Border radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    
+    /* Font sizes */
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 24px;
+    --font-size-3xl: 32px;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 300ms ease;
+}
+
+/* Dark theme */
+body.dark-theme {
+    --color-bg: #1a1a1a;
+    --color-bg-secondary: #2d2d2d;
+    --color-bg-tertiary: #3a3a3a;
+    --color-text: #e0e0e0;
+    --color-text-secondary: #a0a0a0;
+    --color-text-tertiary: #787878;
+    --color-border: #3a3a3a;
+    --color-border-hover: #4a4a4a;
+    --color-primary: #4a9eff;
+    --color-primary-hover: #3a8eef;
+    --color-primary-light: #1a3a4a;
+    --color-sidebar-bg: #242424;
+    --color-sidebar-text: #e0e0e0;
+    --color-sidebar-hover: #3a3a3a;
+    --color-sidebar-active: #4a9eff;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+    :root {
+        --color-text: #000000;
+        --color-bg: #ffffff;
+    }
+    
+    body.dark-theme {
+        --color-text: #ffffff;
+        --color-bg: #000000;
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "examens",
+  "version": "0.1.0",
+  "description": "EXAMENS - Application Desktop Offline de gestion des vrais sujets d'examens",
+  "type": "module",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "build:debug": "tauri build --debug",
+    "start": "python3 -m http.server 8000 --directory src",
+    "test": "echo 'Tests can be added here'"
+  },
+  "dependencies": {
+    "@tauri-apps/plugin-fs": "^2.5.1",
+    "pdfjs-dist": "^6.2.108"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "tauri",
+    "desktop",
+    "exams",
+    "education"
+  ],
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.4"
+  }
+}

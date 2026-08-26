@@ -1,7 +1,7 @@
 use chrono::{Utc};
 use rusqlite::{params, Connection};
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::sync::Mutex;
 use tauri::{Manager, State};
 
@@ -432,7 +432,7 @@ pub fn run() {
             if let Ok(data_dir) = app.path().app_data_dir() {
                 fs::create_dir_all(&data_dir).map_err(|e| format!("Failed to create app data directory: {}", e))?;
                 if let Ok(mut state) = app_handle.state::<AppState>().data_dir.lock() {
-                    *state = Some(data_dir);
+                    *state = Some(data_dir.clone());
                 }
                 if let Ok(mut state) = app_handle.state::<AppState>().db_path.lock() {
                     let db_path = data_dir.join("examens.db");

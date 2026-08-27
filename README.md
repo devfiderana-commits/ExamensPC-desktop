@@ -1,6 +1,3 @@
-Oui. Pour ton dépôt **`ExamensPC-desktop`**, il faut surtout corriger plusieurs incohérences de l'ancien README : tu utilises **Tauri 2**, SQLite est déjà intégré, le build GitHub Actions produit des artifacts, et il faut donner des liens de téléchargement clairs.
-
-Voici une version plus professionnelle, adaptée à GitHub, avec **licence MIT**, outils/prérequis et section **Téléchargement**.
 
 # 📚 EXAMENS PC Desktop
 

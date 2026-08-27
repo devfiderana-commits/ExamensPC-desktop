@@ -13,20 +13,25 @@ const STORAGE_KEYS = {
     RECENT: 'recent'
 };
 
-const normalizeExam = (exam = {}) => ({
-    id: exam.id || exam.exam_id || `exam_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`,
-    title: exam.title || exam.titre || 'Sujet sans titre',
-    subject: exam.subject || 'Physique',
-    chapter: exam.chapter || 'General',
-    year: Number(exam.year || new Date().getFullYear()),
-    session: exam.session || 'Normale',
-    filePath: exam.file_path || exam.filePath || '',
-    fileType: (exam.file_type || exam.fileType || 'pdf').toLowerCase(),
-    favorite: Boolean(exam.favorite),
-    createdAt: exam.created_at || exam.createdAt || exam.date_ajout || new Date().toISOString(),
-    lastOpenedAt: exam.last_opened_at || exam.lastOpenedAt || null,
-    dateModification: exam.date_modification || exam.dateModification || exam.createdAt || null
-});
+const normalizeExam = (exam) => {
+    const e = exam || {};
+    const computedId = e.id || e.exam_id || `exam_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+    const fileTypeRaw = (e.file_type || e.fileType || 'pdf');
+    return {
+        id: computedId,
+        title: e.title || e.titre || 'Sujet sans titre',
+        subject: e.subject || 'Physique',
+        chapter: e.chapter || 'General',
+        year: Number(e.year || new Date().getFullYear()),
+        session: e.session || 'Normale',
+        filePath: e.file_path || e.filePath || '',
+        fileType: String(fileTypeRaw).toLowerCase(),
+        favorite: Boolean(e.favorite),
+        createdAt: e.created_at || e.createdAt || e.date_ajout || new Date().toISOString(),
+        lastOpenedAt: e.last_opened_at || e.lastOpenedAt || null,
+        dateModification: e.date_modification || e.dateModification || e.createdAt || null
+    };
+};
 
 class ExamRepository {
     constructor() {

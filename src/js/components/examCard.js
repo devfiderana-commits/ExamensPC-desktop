@@ -49,6 +49,10 @@ export class ExamCard {
 
     static attachListeners() {
         document.querySelectorAll('[data-exam-id]').forEach(card => {
+            // Avoid re-attaching listeners
+            if (card.dataset.listenersAttached) return;
+            card.dataset.listenersAttached = '1';
+
             const examId = card.dataset.examId;
             const openBtn = card.querySelector('.open-btn');
             const favoriteBtn = card.querySelector('.favorite-btn');
@@ -61,10 +65,14 @@ export class ExamCard {
             }
 
             if (favoriteBtn) {
-                favoriteBtn.addEventListener('click', (e) => {
+                favoriteBtn.addEventListener('click', async (e) => {
                     e.stopPropagation();
-                    const isFavorite = examRepository.toggleFavorite(examId);
-                    favoriteBtn.textContent = isFavorite ? '⭐' : '☆';
+                    try {
+                        const isFavorite = await examRepository.toggleFavorite(examId);
+                        favoriteBtn.textContent = isFavorite ? '⭐' : '☆';
+                    } catch (err) {
+                        console.error('toggleFavorite failed:', err);
+                    }
                 });
             }
 

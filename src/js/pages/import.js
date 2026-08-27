@@ -62,7 +62,7 @@ class ImportPage {
 
                         <div class="flex" style="gap: var(--spacing-md);">
                             <button type="submit" class="btn btn-primary">Importer</button>
-                            <button type="button" class="btn btn-secondary" onclick="window.router.navigate('dashboard')">Annuler</button>
+                            <button type="button" class="btn btn-secondary" id="cancel-btn">Annuler</button>
                         </div>
                     </form>
                 </div>
@@ -76,6 +76,10 @@ class ImportPage {
     attachListeners() {
         const form = document.querySelector('#import-form');
         if (!form) return;
+
+        // Prevent attaching listeners multiple times
+        if (form.dataset.attached) return;
+        form.dataset.attached = '1';
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -116,6 +120,15 @@ class ImportPage {
                 alert(error?.message || 'Une erreur est survenue pendant l’import.');
             }
         });
+
+        // Cancel button listener
+        const cancelBtn = document.querySelector('#cancel-btn');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                router.navigate('dashboard');
+            });
+        }
     }
 
     async mounted() {

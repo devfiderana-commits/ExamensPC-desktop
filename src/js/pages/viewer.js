@@ -9,7 +9,7 @@ import { getFileIcon } from '../utils.js';
 
 // PDF.js library initialization
 let pdfjsLib = null;
-if (typeof window !== 'undefined' && window.pdfjsWorker) {
+if (typeof window !== 'undefined' && window.pdfjsLib) {
     pdfjsLib = window.pdfjsLib;
 }
 

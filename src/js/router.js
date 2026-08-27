@@ -42,12 +42,34 @@ class Router {
 
             const content = await this.currentPage.render();
             this.renderContent(content);
+
+            // Call lifecycle hooks if present so pages can attach listeners reliably
+            if (this.currentPage && typeof this.currentPage.mounted === 'function') {
+                try { await this.currentPage.mounted(); } catch (e) { console.error('mounted() error:', e); }
+            }
+            if (this.currentPage && typeof this.currentPage.afterRender === 'function') {
+                try { await this.currentPage.afterRender(); } catch (e) { console.error('afterRender() error:', e); }
+            }
+
             this.notifyListeners();
 
             // Scroll to top
-            document.querySelector('.content').scrollTop = 0;
+            const contentArea = document.getElementById('content') || document.querySelector('.content');
+            if (contentArea) contentArea.scrollTop = 0;
         } catch (error) {
             console.error(`Error navigating to "${pageName}":`, error);
+            const contentArea = document.getElementById('content');
+            if (contentArea) {
+                contentArea.innerHTML = `
+                    <div class="content-wrapper">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">❌</div>
+                            <div class="empty-state-title">Erreur lors du chargement</div>
+                            <div class="empty-state-description">Une erreur est survenue lors de la navigation. Vérifiez la console pour plus de détails.</div>
+                        </div>
+                    </div>
+                `;
+            }
         }
     }
 

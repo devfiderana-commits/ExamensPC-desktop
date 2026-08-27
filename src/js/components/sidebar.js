@@ -10,6 +10,7 @@ class Sidebar {
     constructor() {
         this.element = null;
         this.unsubscribe = null;
+        this._outsideClickHandler = null;
     }
 
     render() {
@@ -138,14 +139,17 @@ class Sidebar {
             });
         }
 
-        // Close menu on page click
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.sidebar') && 
-                !e.target.closest('#sidebar-toggle') &&
-                state.state.isMenuOpen) {
-                state.closeMenu();
-            }
-        });
+        // Close menu on page click (attach once)
+        if (!this._outsideClickHandler) {
+            this._outsideClickHandler = (e) => {
+                if (!e.target.closest('.sidebar') && 
+                    !e.target.closest('#sidebar-toggle') &&
+                    state.getState().isMenuOpen) {
+                    state.closeMenu();
+                }
+            };
+            document.addEventListener('click', this._outsideClickHandler);
+        }
     }
 
     toggleSubmenu(subject) {
@@ -168,6 +172,7 @@ class Sidebar {
     }
 
     updateActiveItem(page) {
+        if (!this.element) return;
         this.element.querySelectorAll('[data-page]').forEach(item => {
             item.classList.remove('active');
         });
@@ -197,6 +202,10 @@ class Sidebar {
     cleanup() {
         if (this.unsubscribe) {
             this.unsubscribe();
+        }
+        if (this._outsideClickHandler) {
+            document.removeEventListener('click', this._outsideClickHandler);
+            this._outsideClickHandler = null;
         }
     }
 }
